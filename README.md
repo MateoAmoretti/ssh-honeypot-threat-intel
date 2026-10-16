@@ -12,7 +12,7 @@ To practise the core of SOC analyst work on real attacker data: collect logs, ad
 
 ## Progress
 
-- [ ] Stage 1: cloud server hardened (key-only SSH on a private port, two firewalls)
+- [x] Stage 1: cloud server hardened (key-only SSH on a private port, two firewalls)
 - [ ] Stage 2: Cowrie live on port 22, collecting for 30 days
 - [ ] Stage 3: Python pipeline (SQLite, geolocation, AbuseIPDB, VirusTotal, ATT&CK)
 - [ ] Stage 4: Streamlit dashboard
