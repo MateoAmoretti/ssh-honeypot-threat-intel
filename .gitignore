@@ -1,0 +1,39 @@
+# .gitignore: files git must never upload to GitHub.
+# Lines starting with # are comments. Read every line: you may be asked why it's here.
+
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.ppk
+id_rsa*
+id_ed25519*
+honeypot_admin*
+known_hosts
+
+# Raw data: contains real IP addresses, yours and attackers'
+data/
+logs/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+*.mmdb
+cowrie.json*
+
+# Attacker downloads: must never be on this laptop; ignored just in case
+downloads/
+
+# Python clutter
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor and OS clutter
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
