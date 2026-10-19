@@ -1,4 +1,4 @@
-# Devlog
+﻿# Devlog
 
 Newest entries first. One entry every day while the honeypot collects (Day 1 to Day 30), then one for every day I work on the project.
 
