@@ -1,6 +1,27 @@
 ﻿# Devlog
 
 Newest entries first. One entry every day while the honeypot collects (Day 1 to Day 30), then one for every day I work on the project.
+
+## Day 6 – Wed 21 Oct 2026
+
+- Honeypot: live, day 6
+- Numbers (00:00 to about 22:05 UTC): 82 connections, 55 unique IPs, 4 logins, 0 commands, 0 files
+- 77.239.124.x logged in twice more as root with random 8 letter passwords (QSJRjOdY, nIsasMUc). That's 4 out of the last 5 days for this IP, always root, always a new random password, never runs anything after. Looks like a slow brute force bot that just keeps going (T1110.001).
+- Other logins: admin/admin and root with an empty password. No commands at all today.
+- Learned: not every bot is fast and noisy. This one comes back a couple of times a day for days, which would be easy to miss if you only looked for big spikes.
+- Next: check what the 4 files saved late on Monday were (hashes only), then start the Stage 3 sign-ups
+
+## Day 5 – Tue 20 Oct 2026 (written up Wed 21 Oct from the logs)
+
+- Honeypot: live, day 5
+- Numbers: 87 connections, 51 unique IPs, 2 logins, 1 command, 0 files
+- 138.68.30.x logged in as firedancer/firedancer. Firedancer is software for running Solana crypto nodes, so this bot is looking for crypto servers specifically.
+- After logging in it ran "/bin/./uname -s -v -n -r -m", the same odd command as the 4 IPs on Sunday. That's 5 different IPs now with the exact same signature. Going to check in Stage 3 whether they all belong to the same hosting company.
+- 77.239.124.x came back again: root with another random 8 letter password (KGRcmSqP).
+- Busiest IP was 47.116.108.x with 6 connections but it never tried to log in, just scanning.
+- Learned: the usernames tell you what the bot is hunting for. pi = Raspberry Pi, nvidia = Jetson boards, firedancer = Solana nodes.
+- Next: today's numbers
+
 ## Day 4 – Mon 19 Oct 2026
 
 - Honeypot: live, day 4
