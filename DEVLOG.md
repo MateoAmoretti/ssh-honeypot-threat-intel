@@ -2,6 +2,71 @@
 
 Newest entries first. One entry every day while the honeypot collects (Day 1 to Day 30), then one for every day I work on the project.
 
+## Day 14 – Thu 29 Oct 2026
+
+- Honeypot: live, day 14
+- Numbers (so far today): 63 connections, 41 unique IPs, 6 logins, 4 commands, 0 files
+- 107.170.58.x logged in as lighthouse/123456 then ran "/bin/./uname -s -v -n -r -m". That signature is now up to 7 different IPs. Lighthouse looks like the name of a cloud server product, so the bot is guessing its default login.
+- 183.30.219.x: root/ubuntu then the fake "sshd" again, same as most days this week
+- 164.30.17.x ran "echo xsec". Just checking the shell actually runs commands, probably a honeypot test.
+- 195.3.220.x (busiest IP on Monday) came back, logged in as root/Admin123! and ran whoami
+- Learned: some bots run a tiny harmless command first just to see if they get a real answer back
+- Next: Sunday LinkedIn post (2 weeks of data), then start Stage 3
+
+## Day 13 – Wed 28 Oct 2026 (written up Thu 29 Oct from the logs)
+
+- Honeypot: live, day 13
+- Numbers: 113 connections, 69 unique IPs (most so far), 3 logins, 0 commands, 0 files
+- Busiest day for connections but the quietest for actual activity. Logins were admin/admin, 0/0 and root/linux, and none of them ran anything.
+- Learned: more connections doesn't mean more danger. Most of it is scanning.
+
+## Day 12 – Tue 27 Oct 2026 (written up Thu 29 Oct from the logs)
+
+- Honeypot: live, day 12
+- Numbers: 83 connections, 47 unique IPs, 1 login, 1 command, 0 files
+- The only login was 218.51.197.x (root/ubuntu), the same IP that did the fake "sshd" on Friday. Came back 4 days later and did exactly the same thing again.
+
+## Day 11 – Mon 26 Oct 2026 (written up Thu 29 Oct from the logs)
+
+- Honeypot: live, day 11
+- Numbers: 82 connections, 53 unique IPs, 2 logins, 1 command, 0 files
+- 193.95.2.x: root/ubuntu then the fake "sshd". One of the IPs it passed to the program was 103.180.163.x, which attacked me itself on Saturday with the same "sshd" trick. So the infected machines seem to share each other's addresses, which looks like a botnet passing round a peer list.
+
+## Day 10 – Sun 25 Oct 2026
+
+- Honeypot: live, day 10
+- Numbers (full day): 105 connections, 66 unique IPs, 4 logins, 7 failed, 7 commands, 1 file saved
+- First real malware sample. 60.205.183.x logged in as root/password and ran an automated install:
+  - `cat /bin/echo` to work out the CPU type so it sends the right build (T1082)
+  - opened a raw TCP connection with bash's /dev/tcp to 39.106.149.x port 60122 and sent "GET /linux" to download a file. No wget or curl needed (T1105)
+  - saved exactly 1,458,464 bytes to a random name in /tmp
+  - bits of the binary leaked into the log: "ELF" (a Linux program) and "UPX!" (packed to hide it from antivirus, T1027.002)
+- Cowrie saved it as 2111d820...25200d46. Not opening it or copying it anywhere. VirusTotal hash check still to do.
+- Other logins: admin/admin, root/abcd1234 (ran uname -a), root with an empty password
+- Learned: you can download files with nothing but bash using /dev/tcp. A rule that only watches for wget/curl would miss this completely. Good idea for a Sigma rule in Project 2.
+
+## Day 9 – Sat 24 Oct 2026 (written up Thu 29 Oct from the logs)
+
+- Honeypot: live, day 9
+- Numbers: 99 connections, 54 unique IPs, 6 logins, 10 failed, 12 commands, 3 files saved
+- Three different IPs (4.4.66.x, 103.180.163.x, 217.218.10.x) all logged in as root/ubuntu and ran the fake "sshd" within 6 hours. The folder name starts with a dot so a normal ls won't show it (T1564.001).
+- 92.118.39.x came back (it was here on day 2) and ran the "filter" recon script 3 times. Same hash as every other time (af77b643...).
+
+## Day 8 – Fri 23 Oct 2026 (written up Thu 29 Oct from the logs)
+
+- Honeypot: live, day 8
+- Numbers: 94 connections, 57 unique IPs, 9 logins, 15 commands, 3 files saved
+- 218.51.197.x: root/ubuntu then the fake "sshd", this time passing it a list of other IP addresses
+- 159.65.99.x did user/1 then nvidia/nvidia, both followed by "/bin/./uname", the same pattern as 138.197.216.x on day 3
+- 92.118.39.x ran the "filter" script 3 times with passwords 123, 1234, 12345. It logged in fine on the first one but kept going anyway, so the bot just works through its list without checking.
+
+## Day 7 – Thu 22 Oct 2026 (written up Thu 29 Oct from the logs)
+
+- Honeypot: live, day 7
+- Numbers: 100 connections, 52 unique IPs, 7 logins, 11 commands, 3 files saved
+- 195.178.110.x came back (first seen day 3) and ran the "filter" script 3 times, same hash again
+- 8.219.94.x tried admin2/admin2 and adminuser/adminuser and ran "uname -s -v -n -r -m" without the /bin/./ part, so a different bot from the signature one
+
 ## Day 6 – Wed 21 Oct 2026
 
 - Honeypot: live, day 6
