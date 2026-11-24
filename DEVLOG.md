@@ -2,6 +2,44 @@
 
 Newest entries first. One entry every day while the honeypot collects (Day 1 to Day 30), then one for every day I work on the project.
 
+## 24 Nov 2026 – Catch-up (Days 15–40) and honeypot shut down
+
+I stopped writing daily entries after Day 14 (29 Oct). The honeypot kept running and logging the whole time, so no data was lost, but this entry is written today from the logs rather than on the days themselves.
+
+**Collection finished**
+- 30-day dataset: Day 1 (16 Oct) to Day 30 (14 Nov), as planned.
+- I didn't stop it on Day 30, so it ran for 10 extra days. I've kept those as a separate "full run" set instead of mixing them into the 30-day numbers.
+- Cowrie stopped and disabled at 17:57 UTC on 24 Nov (Day 40).
+- Cowrie restarted once on its own, on 19 Nov at 09:08 UTC. It's set to start on boot, so it came straight back. There's a log file for every day from 16 Oct to 24 Nov, so no gaps.
+
+**Numbers** (from `src/count_attacks.py`)
+
+| | 30 days (16 Oct–14 Nov) | Full run (16 Oct–24 Nov) |
+|---|---|---|
+| Connections | 3,220 | 4,617 |
+| Unique source IPs | 1,460 | 2,095 |
+| Login attempts | 471 | 962 |
+| "Successful" logins | 415 | 882 |
+| Commands run | 1,032 | 1,568 |
+
+"Successful" logins aren't real break-ins. Cowrie's default config lets root in with almost any password so it can record what attackers do next.
+
+**What stood out**
+- Most connections never tried to log in (3,220 connections vs 471 login attempts in 30 days). Those are scanners checking whether the port is open.
+- The last 10 days were busier than the whole first month: 491 login attempts from 15–24 Nov vs 471 in the 30 days, plus 635 IPs that hadn't appeared before.
+- root was by far the most tried username. Others like pi, support, operator, default and supervisor are factory logins for Raspberry Pis, routers and IoT devices.
+- Most common password was blank, then 123456, ubuntu and admin. A few attempts used `!root`, which I want to look into.
+- Biggest log days were 1 Nov and 18 Nov (then 31 Oct, 15 Nov and 17 Nov). Haven't looked at what happened on those days yet.
+
+**Data handling**
+- Made two backups of the logs (tar.gz) and copied them to my PC with scp before stopping anything.
+- Raw logs stay outside this repo because they contain unmasked attacker IPs.
+
+**Next**
+- Look into the busy days and the `!root` attempts
+- Pipeline (enrichment + SQLite), dashboard and write-up
+- Shut down the EC2 instance once I've got everything I need off it
+
 ## Day 14 – Thu 29 Oct 2026
 
 - Honeypot: live, day 14
